@@ -336,21 +336,21 @@ const ManagePost = () => {
                                                     <td><label className={item.statusPostData.code == 'PS1' ? 'badge badge-success' : (item.statusPostData.code == 'PS3' ? 'badge badge-warning'  : 'badge badge-danger')}>{item.statusPostData.value}</label></td>
 
                                                     <td>
-                                                        <Link style={{color:'#4B49AC'}} to={`/admin/note/${item.id}`}>Chú thích</Link>
+                                                        <Link style={{color:'#ac7649'}} to={`/admin/note/${item.id}`}>Chú thích</Link>
                                                         &nbsp; &nbsp;
                                                         {(user.roleCode == 'COMPANY' || user.roleCode == 'EMPLOYER') &&
                                                             <>
-                                                                <Link style={{ color: '#4B49AC' }} to={`/admin/list-cv/${item.id}/`}>Xem CV nộp</Link>
+                                                                <Link style={{ color: '#ac7649' }} to={`/admin/list-cv/${item.id}/`}>Xem CV nộp</Link>
                                                                 &nbsp; &nbsp;
                                                             </>
                                                         }
                                                         { 
                                                         item.statusCode.code !== 'PS4' &&
-                                                        <Link style={{ color: '#4B49AC' }} to={`/admin/edit-post/${item.id}/`}>{user?.roleCode === "ADMIN" ? 'Xem chi tiết' : 'Sửa'}</Link>
+                                                        <Link style={{ color: '#ac7649' }} to={`/admin/edit-post/${item.id}/`}>{user?.roleCode === "ADMIN" ? 'Xem chi tiết' : 'Sửa'}</Link>
                                                         }
                                                         &nbsp; &nbsp;
                                                         {user.roleCode == 'ADMIN' ? (item.statusCode == 'PS1' ? <>
-                                                            <a style={{ color: '#4B49AC', cursor: 'pointer' }} onClick={() => setPropsModal({
+                                                            <a style={{ color: '#ac7649', cursor: 'pointer' }} onClick={() => setPropsModal({
                                                                 isActive: true,
                                                                 handlePost: handleBanPost,
                                                                 postId: item.id
@@ -358,16 +358,16 @@ const ManagePost = () => {
                                                             &nbsp; &nbsp;
                                                         </>
                                                             : item.statusCode == 'PS4' ? <>
-                                                                <a style={{ color: '#4B49AC', cursor: 'pointer' }} onClick={() => setPropsModal({
+                                                                <a style={{ color: '#ac7649', cursor: 'pointer' }} onClick={() => setPropsModal({
                                                                     isActive: true,
                                                                     handlePost: handleActivePost,
                                                                     postId: item.id
                                                                 })}  >Mở lại</a>
                                                             </> : <>
-                                                                <a style={{ color: '#4B49AC', cursor: 'pointer' }} onClick={() => confirmPost(item.id)}  >Duyệt</a>
+                                                                <a style={{ color: '#ac7649', cursor: 'pointer' }} onClick={() => confirmPost(item.id)}  >Duyệt</a>
                                                                 {
                                                                     item.statusCode !== 'PS2' &&
-                                                                    <a style={{ color: '#4B49AC', cursor: 'pointer', marginLeft: '10px' }} onClick={() => setPropsModal({
+                                                                    <a style={{ color: '#ac7649', cursor: 'pointer', marginLeft: '10px' }} onClick={() => setPropsModal({
                                                                         isActive: true,
                                                                         handlePost: handleAccecptPost,
                                                                         postId: item.id

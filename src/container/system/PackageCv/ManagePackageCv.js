@@ -117,13 +117,13 @@ const ManagePackageCv = () => {
                                                     <td style={{ textAlign: 'right' }}>{item.price} USD</td>
                                                     <td>{item.isActive == 0 ? 'Dừng kinh doanh' : 'Đang kinh doanh'}</td>
                                                     <td>
-                                                        <Link style={{ color: '#4B49AC' }} to={`/admin/edit-package-post/${item.id}/`}>Sửa</Link>
+                                                        <Link style={{ color: '#ac7649' }} to={`/admin/edit-package-post/${item.id}/`}>Sửa</Link>
                                                         &nbsp; &nbsp;
                                                         {item.isActive == 1 ? (
                                                             <>
-                                                                <a style={{ color: '#4B49AC' }} href="#" onClick={(event) => hanndleSetActivePackage(event,item.id,0)} >Dừng kinh doanh</a>
+                                                                <a style={{ color: '#ac7649' }} href="#" onClick={(event) => hanndleSetActivePackage(event,item.id,0)} >Dừng kinh doanh</a>
                                                             </>) : (<>
-                                                                <a style={{ color: '#4B49AC' }} href="#" onClick={(event) => hanndleSetActivePackage(event,item.id,1)} >Mở kinh doanh</a>
+                                                                <a style={{ color: '#ac7649' }} href="#" onClick={(event) => hanndleSetActivePackage(event,item.id,1)} >Mở kinh doanh</a>
                                                             </>)
                                                         }
                                                     </td>

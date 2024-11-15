@@ -131,9 +131,9 @@ const ManageUser = () => {
                                                     <td>{item.roleData.value}</td>
                                                     <td><label className={item.statusCode === 'S1' ? 'badge badge-success' : 'badge badge-danger'}>{item.statusAccountData.value}</label></td>
                                                     <td>
-                                                        <Link style={{ color: '#4B49AC' }} to={`/admin/edit-user/${item.userAccountData.id}/`}>Sửa</Link>
+                                                        <Link style={{ color: '#ac7649' }} to={`/admin/edit-user/${item.userAccountData.id}/`}>Sửa</Link>
                                                         &nbsp; &nbsp;
-                                                       {user.id != item.id &&  <a style={{ color: '#4B49AC' }} href='#' onClick={(event) => handlebanUser(event, item)} >{item.statusCode === 'S1' ? 'Chặn' : 'Kích hoạt' }</a>}
+                                                       {user.id != item.id &&  <a style={{ color: '#ac7649' }} href='#' onClick={(event) => handlebanUser(event, item)} >{item.statusCode === 'S1' ? 'Chặn' : 'Kích hoạt' }</a>}
                                                     </td>
                                                 </tr>
                                             )

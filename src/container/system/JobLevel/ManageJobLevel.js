@@ -128,9 +128,9 @@ const ManageJobLevel = () => {
                                                     <td>{item.value}</td>
                                                     <td>{item.code}</td>
                                                     <td>
-                                                        <Link style={{ color: '#4B49AC' }} to={`/admin/edit-job-level/${item.code}/`}>Sửa</Link>
+                                                        <Link style={{ color: '#ac7649' }} to={`/admin/edit-job-level/${item.code}/`}>Sửa</Link>
                                                         &nbsp; &nbsp;
-                                                        <a style={{ color: '#4B49AC' }} href="#" onClick={(event) => confirmDelete(item.code)} >Xóa</a>
+                                                        <a style={{ color: '#ac7649' }} href="#" onClick={(event) => confirmDelete(item.code)} >Xóa</a>
                                                     </td>
                                                 </tr>
                                             )

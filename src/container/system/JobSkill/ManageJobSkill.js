@@ -147,9 +147,9 @@ const ManageJobSkill = () => {
                                                     <td>{item.name}</td>
                                                     <td>{item.jobTypeSkillData.value}</td>
                                                     <td>
-                                                        <Link style={{ color: '#4B49AC' }} to={`/admin/edit-job-skill/${item.id}/`}>Sửa</Link>
+                                                        <Link style={{ color: '#ac7649' }} to={`/admin/edit-job-skill/${item.id}/`}>Sửa</Link>
                                                         &nbsp; &nbsp;
-                                                        <a style={{ color: '#4B49AC' }} href="#" onClick={(event) => confirmDelete(item.id)} >Xóa</a>
+                                                        <a style={{ color: '#ac7649' }} href="#" onClick={(event) => confirmDelete(item.id)} >Xóa</a>
                                                     </td>
                                                 </tr>
                                             )

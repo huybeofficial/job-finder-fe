@@ -34,3 +34,15 @@
     }
 }
 
+.section-tittle span {
+    color: #f78809;
+}
+.apply-process-area .single-process {
+    background-color: #FFD15C;
+}
+.apply-process-area .single-process .process-cap h5 {
+    color: #0B4A3B;
+}
+.apply-process-area .single-process .process-ion span {
+    color: #0B4A3B;
+}

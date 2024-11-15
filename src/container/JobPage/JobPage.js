@@ -124,7 +124,7 @@ const JobPage = () => {
                 {/* <!-- Hero Area Start--> */}
                 <div class="slider-area ">
                     <div class="single-slider section-overly slider-height2 d-flex align-items-center" style={{
-                        backgroundImage: `url("assets/img/hero/about.jpg")`
+                        backgroundImage: `url("assets/img/hero/about_2.jpg")`
                     }}>
                         <div class="container">
                             <div class="row">

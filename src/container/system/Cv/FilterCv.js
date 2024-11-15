@@ -309,7 +309,7 @@ const FilterCv = () => {
                                                         </>
                                                     }
                                                     <td>
-                                                        <span style={{ color: '#4B49AC', cursor: 'pointer' }} onClick={()=>confirmSeeCandiate(item.userId)}>Xem chi tiết ứng viên</span>
+                                                        <span style={{ color: '#ac7649', cursor: 'pointer' }} onClick={()=>confirmSeeCandiate(item.userId)}>Xem chi tiết ứng viên</span>
                                                         &nbsp; &nbsp;
                                                     </td>
                                                 </tr>

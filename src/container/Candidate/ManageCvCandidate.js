@@ -108,9 +108,9 @@ const ManageCvCandidate = (props) => {
                                                     <td>{moment(item.createdAt).format('DD-MM-YYYY HH:mm:ss')}</td>
                                                     <td>{item.isChecked === 0 ? 'Chưa xem' : 'Đã xem'}</td>
                                                     <td>
-                                                        <Link style={{ color: '#4B49AC', cursor: 'pointer' }} to={`/detail-job/${item.postCvData.id}/`}>Xem công việc</Link>
+                                                        <Link style={{ color: '#ac7649', cursor: 'pointer' }} to={`/detail-job/${item.postCvData.id}/`}>Xem công việc</Link>
                                                         &nbsp; &nbsp;
-                                                        <Link style={{ color: '#4B49AC', cursor: 'pointer' }} to={`/candidate/cv-detail/${item.id}`}>Xem CV đã nộp</Link>
+                                                        <Link style={{ color: '#ac7649', cursor: 'pointer' }} to={`/candidate/cv-detail/${item.id}`}>Xem CV đã nộp</Link>
                                                         &nbsp; &nbsp;
                                                     </td>
                                                 </tr>

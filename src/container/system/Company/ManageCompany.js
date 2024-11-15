@@ -259,20 +259,20 @@ const ManageCompany = () => {
                                                         {
                                                             item.statusCompanyData.code === 'S1' ? (
                                                             <>
-                                                            <a style={{ color: '#4B49AC', cursor: 'pointer' }} onClick={() => confirmPost(item.id,'ban')} >Dừng kích hoạt</a>
+                                                            <a style={{ color: '#ac7649', cursor: 'pointer' }} onClick={() => confirmPost(item.id,'ban')} >Dừng kích hoạt</a>
                                                                     &nbsp; &nbsp;                           
                                                             </>) : (<>
-                                                                <a style={{ color: '#4B49AC', cursor: 'pointer' }} onClick={() => confirmPost(item.id,'unban')} >Kích hoạt</a>
+                                                                <a style={{ color: '#ac7649', cursor: 'pointer' }} onClick={() => confirmPost(item.id,'unban')} >Kích hoạt</a>
                                                                 &nbsp; &nbsp;
                                                             </>)
                                                         }
-                                                        <Link style={{ color: '#4B49AC' }} to={`/admin/edit-company-admin/${item.id}`}>{user?.roleCode === "ADMIN" ? 'Xem chi tiết' : 'Sửa'}</Link>
+                                                        <Link style={{ color: '#ac7649' }} to={`/admin/edit-company-admin/${item.id}`}>{user?.roleCode === "ADMIN" ? 'Xem chi tiết' : 'Sửa'}</Link>
                                                         &nbsp; &nbsp;
                                                         {item.censorData.code === 'CS3' &&
                                                             <>
-                                                                <a style={{ color: '#4B49AC', cursor: 'pointer' }} onClick={() => confirmPost(item.id,'accept')} >Duyệt</a>
+                                                                <a style={{ color: '#ac7649', cursor: 'pointer' }} onClick={() => confirmPost(item.id,'accept')} >Duyệt</a>
                                                                 &nbsp; &nbsp;
-                                                                <a style={{ color: '#4B49AC', cursor: 'pointer' }} onClick={() => setPropsModal({
+                                                                <a style={{ color: '#ac7649', cursor: 'pointer' }} onClick={() => setPropsModal({
                                                                     isActive: true,
                                                                     handleCompany: handleAccecptCompany,
                                                                     id: item.id
@@ -283,7 +283,7 @@ const ManageCompany = () => {
                                                         {
                                                             item.censorData.code === 'CS1' &&
                                                             <>
-                                                                <a style={{ color: '#4B49AC', cursor: 'pointer' }} onClick={() => setPropsModal({
+                                                                <a style={{ color: '#ac7649', cursor: 'pointer' }} onClick={() => setPropsModal({
                                                                     isActive: true,
                                                                     handleCompany: handleAccecptCompany,
                                                                     id: item.id

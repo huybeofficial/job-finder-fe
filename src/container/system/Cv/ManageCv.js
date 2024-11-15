@@ -113,7 +113,7 @@ const ManageCv = () => {
                                                     <td><label className={+item.file.split('%')[0] >= 70 ? 'badge badge-success' : (+item.file.split('%')[0] > 30 ? 'badge badge-warning'  : 'badge badge-danger')}>{+item.file.split('%')[0] >= 70 ? 'Tốt' : (+item.file.split('%')[0] > 30 ? 'Tạm chấp nhận'  : 'Tệ')}</label></td>
                                                     <td>{item.isChecked === 0 ? 'Chưa xem' : 'Đã xem'}</td>
                                                     <td>
-                                                        <Link style={{ color: '#4B49AC', cursor: 'pointer' }} to={`/admin/user-cv/${item.id}/`}>Xem CV</Link>
+                                                        <Link style={{ color: '#ac7649', cursor: 'pointer' }} to={`/admin/user-cv/${item.id}/`}>Xem CV</Link>
                                                         &nbsp; &nbsp;
 
                                                     </td>
