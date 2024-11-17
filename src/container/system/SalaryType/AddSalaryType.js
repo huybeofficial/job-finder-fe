@@ -3,46 +3,31 @@ import { useEffect, useState } from 'react';
 import { createAllCodeService, getDetailAllcodeByCode, UpdateAllcodeService } from '../../../service/userService';
 import { toast } from 'react-toastify';
 import { useHistory, useParams } from "react-router-dom";
-import { Spinner, Modal } from 'reactstrap'
+import { Modal } from 'reactstrap'
 import '../../../components/modal/modal.css'
 import CommonUtils from '../../../util/CommonUtils';
 
 const AddSalaryType = () => {
-
-
-    const [isActionADD, setisActionADD] = useState(true)
-    const [isLoading, setIsLoading] = useState(false)
-
+    const history = useHistory()
     const { id } = useParams();
-
+    const [isActionADD, setIsActionADD] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
     const [inputValues, setInputValues] = useState({
         value: '', code: ''
     });
 
     useEffect(() => {
-
         if (id) {
             let fetchDetailSalaryType = async () => {
-                setisActionADD(false)
+                setIsActionADD(false)
                 let allcode = await getDetailAllcodeByCode(id)
                 if (allcode && allcode.errCode === 0) {
-                    setInputValues({ ...inputValues, ["value"]: allcode.data.value, ["code"]: allcode.data.code })
+                    setInputValues({ ...inputValues, value: allcode.data?.value, code: allcode.data?.code })
                 }
             }
             fetchDetailSalaryType()
         }
     }, [])
-
-    useEffect(() => {
-        const delayDebounceFn = setTimeout(() => {
-            setInputValues({
-                ...inputValues,
-                value: CommonUtils.removeSpace(inputValues.value)
-            })
-        }, 50)
-    
-        return () => clearTimeout(delayDebounceFn)
-      }, [inputValues.value])
 
     const handleOnChange = event => {
         const { name, value } = event.target;
@@ -74,9 +59,10 @@ const AddSalaryType = () => {
                     toast.success("Thêm khoảng lương thành công")
                     setInputValues({
                         ...inputValues,
-                        ["value"]: '',
-                        ["code"]: '',
+                        value: '',
+                        code: '',
                     })
+                    return history.push("/admin/list-salary-type")
                 }
                 else if (res && res.errCode === 2) {
                     toast.error(res.errMessage)
@@ -92,7 +78,7 @@ const AddSalaryType = () => {
                 setIsLoading(false)
                 if (res && res.errCode === 0) {
                     toast.success("Cập nhật khoảng lương thành công")
-
+                    return history.push("/admin/list-salary-type")
                 }
                 else if (res && res.errCode === 2) {
                     toast.error(res.errMessage)
@@ -101,7 +87,6 @@ const AddSalaryType = () => {
             }, 50);
         }
     }
-    const history = useHistory()
     return (
         <div className=''>
             <div className="col-12 grid-margin">

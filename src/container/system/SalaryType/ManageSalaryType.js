@@ -1,7 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import { DeleteAllcodeService, getListAllCodeService } from '../../../service/userService';
-import moment from 'moment';
 import { PAGINATION } from '../../../util/constant';
 import ReactPaginate from 'react-paginate';
 import { Link } from 'react-router-dom';
@@ -14,7 +13,7 @@ const {confirm} = Modal
 const ManageSalaryType = () => {
     const [dataSalaryType, setdataSalaryType] = useState([])
     const [count, setCount] = useState('')
-    const [numberPage, setnumberPage] = useState('')
+    const [numberPage, setNumberPage] = useState('')
     const [search,setSearch] = useState('')
 
     useEffect(() => {
@@ -30,7 +29,7 @@ const ManageSalaryType = () => {
                 })
                 if (arrData && arrData.errCode === 0) {
                     setdataSalaryType(arrData.data)
-                    setnumberPage(0)
+                    setNumberPage(0)
                     setCount(Math.ceil(arrData.count / PAGINATION.pagerow))
                 }
             }
@@ -61,7 +60,7 @@ const ManageSalaryType = () => {
         } else toast.error(res.errMessage)
     }
     let handleChangePage = async (number) => {
-        setnumberPage(number.selected)
+        setNumberPage(number.selected)
         let arrData = await getListAllCodeService({
 
             type: 'SALARYTYPE',
