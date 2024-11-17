@@ -1,21 +1,17 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
-import { getPackageById , createPackagePost , updatePackagePost } from '../../../service/userService';
+import { getPackageById, createPackagePost, updatePackagePost } from '../../../service/userService';
 import { toast } from 'react-toastify';
 import { useHistory, useParams } from "react-router-dom";
-import { Spinner, Modal } from 'reactstrap'
+import { Modal } from 'reactstrap'
 import '../../../components/modal/modal.css'
 const AddpackagePost = () => {
-
-
+    const history = useHistory()
     const [isActionADD, setisActionADD] = useState(true)
     const [isLoading, setIsLoading] = useState(false)
-
-
     const { id } = useParams();
-
     const [inputValues, setInputValues] = useState({
-        value: '', price: '' , isHot: 0 , name: ''
+        value: '', price: '', isHot: 0, name: ''
     });
     useEffect(() => {
 
@@ -24,7 +20,7 @@ const AddpackagePost = () => {
                 setisActionADD(false)
                 let res = await getPackageById(id)
                 if (res && res.errCode === 0) {
-                    setInputValues({ ...inputValues, ["value"]: res.data.value, ["id"]: res.data.id , ["price"] : res.data.price , ["name"] : res.data.name })
+                    setInputValues({ ...inputValues, value: res.data?.value, id: res.data?.id, price: res.data?.price, name: res.data?.name })
                 }
             }
             fetchDetailPackagePost()
@@ -35,7 +31,7 @@ const AddpackagePost = () => {
         const { name, value } = event.target;
         setInputValues({ ...inputValues, [name]: value });
 
-    };  
+    };
     let handleSavePackagePost = async () => {
         setIsLoading(true)
         if (isActionADD === true) {
@@ -51,8 +47,8 @@ const AddpackagePost = () => {
                     toast.success(res.errMessage)
                     setInputValues({
                         ...inputValues,
-                        ["value"]: '',
-                        ["code"]: '',
+                        value: '',
+                        code: '',
                         price: '',
                         name: ''
                     })
@@ -82,13 +78,12 @@ const AddpackagePost = () => {
             }, 500);
         }
     }
-    const history = useHistory()
     return (
         <div className=''>
             <div className="col-12 grid-margin">
                 <div className="card">
                     <div className="card-body">
-                    <div onClick={()=> history.goBack()} className='mb-2 hover-pointer' style={{color:'red'}}><i class="fa-solid fa-arrow-left mr-2"></i>Quay lại</div>
+                        <div onClick={() => history.goBack()} className='mb-2 hover-pointer' style={{ color: 'red' }}><i class="fa-solid fa-arrow-left mr-2"></i>Quay lại</div>
 
                         <h4 className="card-title">{isActionADD === true ? 'Thêm mới gói bài viết' : 'Cập nhật gói bài viết'}</h4>
                         <br></br>
@@ -152,7 +147,7 @@ const AddpackagePost = () => {
                         position: 'absolute', right: '50%',
                         justifyContent: 'center', alignItems: 'center'
                     }}>
-                       <div class="spinner-border" role="status">
+                        <div class="spinner-border" role="status">
                             <span class="visually-hidden"></span>
                         </div>
                     </div>
