@@ -2,48 +2,45 @@ import React from 'react'
 import { useEffect, useState } from 'react';
 import { getAllListCvByPostService } from '../../../service/cvService';
 import { getDetailPostByIdService } from '../../../service/userService';
-
 import { PAGINATION } from '../../../util/constant';
 import ReactPaginate from 'react-paginate';
 import { Link, useHistory } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 
-
 const ManageCv = () => {
+    const { id } = useParams();
+    const history = useHistory()
     const [dataCv, setdataCv] = useState([])
     const [count, setCount] = useState('')
     const [numberPage, setnumberPage] = useState('')
-    const { id } = useParams();
-    const [post,setPost] = useState('')
+    const [post, setPost] = useState('')
+
+    useEffect(() => {
+        if (id) {
+            fetchData();
+            fetchPost(id)
+        }
+    }, [])
+
+    let fetchData = async () => {
+        let arrData = await getAllListCvByPostService({
+            limit: PAGINATION.pagerow,
+            offset: 0,
+            postId: id
+        })
+        if (arrData && arrData.errCode === 0) {
+            setdataCv(arrData.data)
+            setCount(Math.ceil(arrData.count / PAGINATION.pagerow))
+        }
+    }
+
     let fetchPost = async (id) => {
         let res = await getDetailPostByIdService(id)
         if (res && res.errCode === 0) {
             setPost(res.data)
         }
     }
-    useEffect(() => {
-        if (id) {
-            try {
-                let fetchData = async () => {
-                    let arrData = await getAllListCvByPostService({
-                        limit: PAGINATION.pagerow,
-                        offset: 0,
-                        postId: id
-                    })
-                    if (arrData && arrData.errCode === 0) {
-                        setdataCv(arrData.data)
-                        setCount(Math.ceil(arrData.count / PAGINATION.pagerow))
-                    }
-                }
-                fetchData();
-                fetchPost(id)
-            } catch (error) {
-                console.log(error)
-            }
-        }
 
-
-    }, [])
 
     let handleChangePage = async (number) => {
         setnumberPage(number.selected)
@@ -60,11 +57,8 @@ const ManageCv = () => {
 
         }
     }
-    const history = useHistory()
     return (
-
         <div>
-
             <div className="col-12 grid-margin">
                 <div className="card">
                     <div className="card-body">
@@ -110,7 +104,7 @@ const ManageCv = () => {
                                                     <td>{item.userCvData.firstName + " " + item.userCvData.lastName}</td>
                                                     <td>{item.userCvData.userAccountData.phonenumber}</td>
                                                     <td>{item.file}</td>
-                                                    <td><label className={+item.file.split('%')[0] >= 70 ? 'badge badge-success' : (+item.file.split('%')[0] > 30 ? 'badge badge-warning'  : 'badge badge-danger')}>{+item.file.split('%')[0] >= 70 ? 'Tốt' : (+item.file.split('%')[0] > 30 ? 'Tạm chấp nhận'  : 'Tệ')}</label></td>
+                                                    <td><label className={+item.file.split('%')[0] >= 70 ? 'badge badge-success' : (+item.file.split('%')[0] > 30 ? 'badge badge-warning' : 'badge badge-danger')}>{+item.file.split('%')[0] >= 70 ? 'Tốt' : (+item.file.split('%')[0] > 30 ? 'Tạm chấp nhận' : 'Tệ')}</label></td>
                                                     <td>{item.isChecked === 0 ? 'Chưa xem' : 'Đã xem'}</td>
                                                     <td>
                                                         <Link style={{ color: '#ac7649', cursor: 'pointer' }} to={`/admin/user-cv/${item.id}/`}>Xem CV</Link>
@@ -125,13 +119,13 @@ const ManageCv = () => {
                                 </tbody>
                             </table>
                             {
-                                            dataCv && dataCv.length == 0 && (
-                                                <div style={{ textAlign: 'center' }}>
+                                dataCv && dataCv.length == 0 && (
+                                    <div style={{ textAlign: 'center' }}>
 
-                                                    Không có dữ liệu
+                                        Không có dữ liệu
 
-                                                </div>
-                                            )
+                                    </div>
+                                )
                             }
                         </div>
                     </div>
