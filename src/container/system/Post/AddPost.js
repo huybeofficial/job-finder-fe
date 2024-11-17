@@ -8,13 +8,12 @@ import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
 import { useFetchAllcode } from '../../../util/fetch';
 import { useHistory, useParams } from "react-router-dom";
-import { Spinner, Modal } from 'reactstrap'
-import localization from 'moment/locale/vi';
+import { Modal } from 'reactstrap'
 import moment from 'moment';
 import '../../../components/modal/modal.css'
 import ReupPostModal from '../../../components/modal/ReupPostModal';
+
 const AddPost = () => {
-    const today = new Date();
     const mdParser = new MarkdownIt();
     const [user, setUser] = useState({})
     const [timeEnd, settimeEnd] = useState('');
@@ -62,29 +61,29 @@ const AddPost = () => {
     let setStatePost = (data) => {
         setInputValues({
             ...inputValues,
-            ["name"]: data.postDetailData.name,
-            ["categoryJobCode"]: data.postDetailData.jobTypePostData.code,
-            ["addressCode"]: data.postDetailData.provincePostData.code,
-            ["salaryJobCode"]: data.postDetailData.salaryTypePostData.code,
-            ["amount"]: data.postDetailData.amount,
-            ["timeEnd"]: data.timeEnd,
-            ["categoryJoblevelCode"]: data.postDetailData.jobLevelPostData.code,
-            ["categoryWorktypeCode"]: data.postDetailData.workTypePostData.code,
-            ["experienceJobCode"]: data.postDetailData.expTypePostData.code,
-            ["genderCode"]: data.postDetailData.genderPostData.code,
-            ["descriptionHTML"]: data.postDetailData.descriptionHTML,
-            ["descriptionMarkdown"]: data.postDetailData.descriptionMarkdown,
-            ["isActionADD"]: false,
-            ["id"]: data.id
+            name: data.postDetailData?.name,
+            categoryJobCode: data.postDetailData?.jobTypePostData.code,
+            addressCode: data.postDetailData?.provincePostData.code,
+            salaryJobCode: data.postDetailData?.salaryTypePostData.code,
+            amount: data.postDetailData?.amount,
+            timeEnd: data.timeEnd,
+            categoryJoblevelCode: data.postDetailData?.jobLevelPostData.code,
+            categoryWorktypeCode: data.postDetailData?.workTypePostData.code,
+            experienceJobCode: data.postDetailData?.expTypePostData.code,
+            genderCode: data.postDetailData?.genderPostData.code,
+            descriptionHTML: data.postDetailData?.descriptionHTML,
+            descriptionMarkdown: data.postDetailData?.descriptionMarkdown,
+            isActionADD: false,
+            id: data.id
 
         })
-        document.querySelector('[name="categoryJobCode"]').value = data.postDetailData.jobTypePostData.code
-        document.querySelector('[name="addressCode"]').value = data.postDetailData.provincePostData.code
-        document.querySelector('[name="salaryJobCode"]').value = data.postDetailData.salaryTypePostData.code
-        document.querySelector('[name="categoryJoblevelCode"]').value = data.postDetailData.jobLevelPostData.code
-        document.querySelector('[name="categoryWorktypeCode"]').value = data.postDetailData.workTypePostData.code
-        document.querySelector('[name="experienceJobCode"]').value = data.postDetailData.expTypePostData.code
-        document.querySelector('[name="genderCode"]').value = data.postDetailData.genderPostData.code
+        document.querySelector('[name="categoryJobCode').value = data.postDetailData.jobTypePostData.code
+        document.querySelector('[name="addressCode').value = data.postDetailData.provincePostData.code
+        document.querySelector('[name="salaryJobCode').value = data.postDetailData.salaryTypePostData.code
+        document.querySelector('[name="categoryJoblevelCode').value = data.postDetailData.jobLevelPostData.code
+        document.querySelector('[name="categoryWorktypeCode').value = data.postDetailData.workTypePostData.code
+        document.querySelector('[name="experienceJobCode').value = data.postDetailData.expTypePostData.code
+        document.querySelector('[name="genderCode').value = data.postDetailData.genderPostData.code
         settimeEnd(moment.unix(+data.timeEnd / 1000).locale('vi').format('DD/MM/YYYY'))
     }
 
@@ -103,9 +102,9 @@ const AddPost = () => {
     ) {
 
         setInputValues({
-            ...inputValues, ["genderCode"]: dataGenderPost[0].code, ["categoryJobCode"]: dataJobType[0].code,
-            ["categoryJoblevelCode"]: dataJobLevel[0].code, ["salaryJobCode"]: dataSalaryType[0].code, ["experienceJobCode"]: dataExpType[0].code,
-            ["categoryWorktypeCode"]: dataWorkType[0].code, ["addressCode"]: dataProvince[0].code
+            ...inputValues, genderCode: dataGenderPost[0].code, categoryJobCode: dataJobType[0].code,
+            categoryJoblevelCode: dataJobLevel[0].code, salaryJobCode: dataSalaryType[0].code, experienceJobCode: dataExpType[0].code,
+            categoryWorktypeCode: dataWorkType[0].code, addressCode: dataProvince[0].code
         })
     }
     const handleOnChange = event => {
@@ -122,8 +121,8 @@ const AddPost = () => {
     let handleEditorChange = ({ html, text }) => {
         setInputValues({
             ...inputValues,
-            ["descriptionMarkdown"]: text,
-            ["descriptionHTML"]: html
+            descriptionMarkdown: text,
+            descriptionHTML: html
         })
     }
     let handleOnChangeDatePicker = (date) => {
@@ -162,19 +161,19 @@ const AddPost = () => {
                         toast.success(res.errMessage)
                         setInputValues({
                             ...inputValues,
-                            ["name"]: '',
-                            ["descriptionHTML"]: '',
-                            ["descriptionMarkdown"]: '',
-                            ["categoryJobCode"]: '',
-                            ["addressCode"]: '',
-                            ["salaryJobCode"]: '',
-                            ["amount"]: '',
-                            ["timeEnd"]: '',
-                            ["categoryJoblevelCode"]: '',
-                            ["categoryWorktypeCode"]: '',
-                            ["experienceJobCode"]: '',
-                            ["genderCode"]: '',
-                            ["isHot"]: 0
+                            name: '',
+                            descriptionHTML: '',
+                            descriptionMarkdown: '',
+                            categoryJobCode: '',
+                            addressCode: '',
+                            salaryJobCode: '',
+                            amount: '',
+                            timeEnd: '',
+                            categoryJoblevelCode: '',
+                            categoryWorktypeCode: '',
+                            experienceJobCode: '',
+                            genderCode: '',
+                            isHot: 0
                         })
                         settimeEnd('')
                     } else {

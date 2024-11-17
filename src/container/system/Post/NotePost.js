@@ -4,12 +4,12 @@ import { getListNoteByPost } from '../../../service/userService';
 import moment from 'moment';
 import { PAGINATION } from '../../../util/constant';
 import ReactPaginate from 'react-paginate';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 
 
 const NotePost = () => {
-    const user = JSON.parse(localStorage.getItem("userData"))
+    const history = useHistory()
     const [dataNotePost, setdataNotePost] = useState([])
     const [count, setCount] = useState('')
     const [numberPage, setnumberPage] = useState('')
@@ -52,7 +52,6 @@ const NotePost = () => {
 
         }
     }
-    const history = useHistory()
     return (
 
         <div>
@@ -60,7 +59,7 @@ const NotePost = () => {
             <div className="col-12 grid-margin">
                 <div className="card">
                     <div className="card-body">
-                    <div onClick={()=> history.goBack()} className='mb-2 hover-pointer' style={{color:'red'}}><i class="fa-solid fa-arrow-left mr-2"></i>Quay lại</div>
+                        <div onClick={() => history.goBack()} className='mb-2 hover-pointer' style={{ color: 'red' }}><i class="fa-solid fa-arrow-left mr-2"></i>Quay lại</div>
 
                         <h4 className="card-title">Thông tin chi tiết các ghi chú bài viết</h4>
 
@@ -94,7 +93,7 @@ const NotePost = () => {
                                                     <td>{index + 1 + numberPage * PAGINATION.pagerow}</td>
                                                     <td>{item.userNoteData.firstName + " " + item.userNoteData.lastName}</td>
                                                     <td>{item.userNoteData.id}</td>
-                                                    <td>{item.note}</td>                                                
+                                                    <td>{item.note}</td>
                                                     <td>{moment(item.createdAt).format('DD-MM-YYYY HH:mm:ss')}</td>
                                                 </tr>
                                             )
@@ -102,7 +101,7 @@ const NotePost = () => {
                                     }
                                 </tbody>
                             </table>
-                                    { dataNotePost && dataNotePost.length==0 && <div style={{textAlign:'center'}}>Không có dữ liệu</div> }    
+                            {dataNotePost && dataNotePost.length == 0 && <div style={{ textAlign: 'center' }}>Không có dữ liệu</div>}
                         </div>
                     </div>
                     <ReactPaginate

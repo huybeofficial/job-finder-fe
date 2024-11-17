@@ -10,17 +10,17 @@ import NoteModal from '../../../components/modal/NoteModal';
 import { Col, Modal, Row, Select } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import CommonUtils from '../../../util/CommonUtils';
-import {Input} from 'antd'
-const {confirm} = Modal
+import { Input } from 'antd'
+const { confirm } = Modal
 const ManagePost = () => {
     const { id } = useParams()
-    const [isSearchBy,setIsSearchBy] = useState(false)
-    const [dataPost, setdataPost] = useState([])
+    const [isSearchBy, setIsSearchBy] = useState(false)
+    const [dataPost, setDataPost] = useState([])
     const [count, setCount] = useState('')
     const [numberPage, setnumberPage] = useState('')
     const [user, setUser] = useState({})
-    const [search,setSearch] = useState('')
-    const [censorCode,setCensorCode] = useState('PS3')
+    const [search, setSearch] = useState('')
+    const [censorCode, setCensorCode] = useState('PS3')
     const [propsModal, setPropsModal] = useState({
         isActive: false,
         handlePost: () => { },
@@ -33,7 +33,7 @@ const ManagePost = () => {
             label: 'Tất cả'
         },
         {
-            value : 'PS1',
+            value: 'PS1',
             label: 'Đã kiểm duyệt'
         },
         {
@@ -64,7 +64,7 @@ const ManagePost = () => {
                         censorCode: ''
                     })
                     if (arrDataById && arrDataById.errCode === 0) {
-                        setdataPost(arrDataById.data)
+                        setDataPost(arrDataById.data)
                         setnumberPage(0)
                         setCount(Math.ceil(arrDataById.count / PAGINATION.pagerow))
                         setTotal(arrDataById.count)
@@ -94,7 +94,7 @@ const ManagePost = () => {
                             })
                         }
                         if (arrData && arrData.errCode === 0) {
-                            setdataPost(arrData.data)
+                            setDataPost(arrData.data)
                             setnumberPage(0)
                             setCount(Math.ceil(arrData.count / PAGINATION.pagerow))
                             setTotal(arrData.count)
@@ -109,7 +109,7 @@ const ManagePost = () => {
             console.log(error)
         }
 
-    }, [search,censorCode])
+    }, [search, censorCode])
 
     let handleChangePage = async (number) => {
         setnumberPage(number.selected)
@@ -133,7 +133,7 @@ const ManagePost = () => {
             })
         }
         if (arrData && arrData.errCode === 0) {
-            setdataPost(arrData.data)
+            setDataPost(arrData.data)
             setTotal(arrData.count)
 
         }
@@ -168,7 +168,7 @@ const ManagePost = () => {
                 })
             }
             if (arrData && arrData.errCode === 0) {
-                setdataPost(arrData.data)
+                setDataPost(arrData.data)
                 setTotal(arrData.count)
 
             }
@@ -204,7 +204,7 @@ const ManagePost = () => {
                 })
             }
             if (arrData && arrData.errCode === 0) {
-                setdataPost(arrData.data)
+                setDataPost(arrData.data)
                 setTotal(arrData.count)
 
             }
@@ -213,7 +213,7 @@ const ManagePost = () => {
             toast.error(res.errMessage)
         }
     }
-    let handleAccecptPost = async (id, note = null, statusCode = 'PS2') => {
+    let handleAcceptPost = async (id, note = null, statusCode = 'PS2') => {
         let res = await acceptPostService({
             id: id,
             statusCode: statusCode,
@@ -241,7 +241,7 @@ const ManagePost = () => {
                 })
             }
             if (arrData && arrData.errCode === 0) {
-                setdataPost(arrData.data)
+                setDataPost(arrData.data)
                 setTotal(arrData.count)
 
             }
@@ -253,14 +253,14 @@ const ManagePost = () => {
     const confirmPost = (id) => {
         confirm({
             title: 'Bạn có chắc muốn duyệt bài viết này?',
-            icon: <ExclamationCircleOutlined />,    
+            icon: <ExclamationCircleOutlined />,
             onOk() {
-                handleAccecptPost(id, '', 'PS1')
+                handleAcceptPost(id, '', 'PS1')
             },
-        
+
             onCancel() {
             },
-          });
+        });
     }
     const handleSearch = (value) => {
         setSearch(value)
@@ -273,13 +273,13 @@ const ManagePost = () => {
                         <h4 className="card-title">Danh sách bài đăng</h4>
                         <Row justify='space-around' className='mt-5 mb-5'>
                             <Col xs={12} xxl={12}>
-                        <Input.Search  onSearch={handleSearch} placeholder={user?.roleCode === "ADMIN" ? "Nhập tên hoặc mã bài đăng, tên công ty" :"Nhập tên hoặc mã bài đăng"} allowClear enterButton="Tìm kiếm">
-                        </Input.Search>
+                                <Input.Search onSearch={handleSearch} placeholder={user?.roleCode === "ADMIN" ? "Nhập tên hoặc mã bài đăng, tên công ty" : "Nhập tên hoặc mã bài đăng"} allowClear enterButton="Tìm kiếm">
+                                </Input.Search>
                             </Col>
                             <Col xs={8} xxl={8}>
                                 <label className='mr-2'>Loại trạng thái: </label>
-                                <Select onChange={(value)=> handleOnChangeCensor(value)} style={{width:'50%'}} size='default' defaultValue={id ? censorOptions[0].value : censorOptions[3].value} options={censorOptions}>
-                                    
+                                <Select onChange={(value) => handleOnChangeCensor(value)} style={{ width: '50%' }} size='default' defaultValue={id ? censorOptions[0].value : censorOptions[3].value} options={censorOptions}>
+
                                 </Select>
                             </Col>
 
@@ -299,10 +299,10 @@ const ManagePost = () => {
                                             Tên bài đăng
                                         </th>
                                         {
-                                        user?.roleCode === 'ADMIN' &&   
-                                        <th>
-                                            Tên công ty
-                                        </th>
+                                            user?.roleCode === 'ADMIN' &&
+                                            <th>
+                                                Tên công ty
+                                            </th>
                                         }
                                         <th>
                                             Tên người đăng
@@ -328,15 +328,15 @@ const ManagePost = () => {
                                                     <td>{item.id}</td>
                                                     <td>{item.postDetailData.name}</td>
                                                     {
-                                                    user?.roleCode === "ADMIN" &&
-                                                    <td>{item.userPostData.userCompanyData.name}</td>
+                                                        user?.roleCode === "ADMIN" &&
+                                                        <td>{item.userPostData.userCompanyData.name}</td>
                                                     }
                                                     <td>{`${item.userPostData.firstName} ${item.userPostData.lastName}`}</td>
                                                     <td>{date}</td>
-                                                    <td><label className={item.statusPostData.code == 'PS1' ? 'badge badge-success' : (item.statusPostData.code == 'PS3' ? 'badge badge-warning'  : 'badge badge-danger')}>{item.statusPostData.value}</label></td>
+                                                    <td><label className={item.statusPostData.code == 'PS1' ? 'badge badge-success' : (item.statusPostData.code == 'PS3' ? 'badge badge-warning' : 'badge badge-danger')}>{item.statusPostData.value}</label></td>
 
                                                     <td>
-                                                        <Link style={{color:'#ac7649'}} to={`/admin/note/${item.id}`}>Chú thích</Link>
+                                                        <Link style={{ color: '#ac7649' }} to={`/admin/note/${item.id}`}>Chú thích</Link>
                                                         &nbsp; &nbsp;
                                                         {(user.roleCode == 'COMPANY' || user.roleCode == 'EMPLOYER') &&
                                                             <>
@@ -344,9 +344,9 @@ const ManagePost = () => {
                                                                 &nbsp; &nbsp;
                                                             </>
                                                         }
-                                                        { 
-                                                        item.statusCode.code !== 'PS4' &&
-                                                        <Link style={{ color: '#ac7649' }} to={`/admin/edit-post/${item.id}/`}>{user?.roleCode === "ADMIN" ? 'Xem chi tiết' : 'Sửa'}</Link>
+                                                        {
+                                                            item.statusCode.code !== 'PS4' &&
+                                                            <Link style={{ color: '#ac7649' }} to={`/admin/edit-post/${item.id}/`}>{user?.roleCode === "ADMIN" ? 'Xem chi tiết' : 'Sửa'}</Link>
                                                         }
                                                         &nbsp; &nbsp;
                                                         {user.roleCode == 'ADMIN' ? (item.statusCode == 'PS1' ? <>
@@ -369,7 +369,7 @@ const ManagePost = () => {
                                                                     item.statusCode !== 'PS2' &&
                                                                     <a style={{ color: '#ac7649', cursor: 'pointer', marginLeft: '10px' }} onClick={() => setPropsModal({
                                                                         isActive: true,
-                                                                        handlePost: handleAccecptPost,
+                                                                        handlePost: handleAcceptPost,
                                                                         postId: item.id
                                                                     })}  >Từ chối</a>
                                                                 }
@@ -384,19 +384,18 @@ const ManagePost = () => {
                                 </tbody>
                             </table>
                             {
-                                            dataPost && dataPost.length == 0 && (
-                                                <div style={{ textAlign: 'center' }}>
+                                dataPost && dataPost.length == 0 && (
+                                    <div style={{ textAlign: 'center' }}>
 
-                                                    Không có dữ liệu
+                                        Không có dữ liệu
 
-                                                </div>
-                                            )
+                                    </div>
+                                )
                             }
                         </div>
                     </div>
                     <ReactPaginate
-                                        forcePage={numberPage}
-
+                        forcePage={numberPage}
                         previousLabel={'Quay lại'}
                         nextLabel={'Tiếp'}
                         breakLabel={'...'}
