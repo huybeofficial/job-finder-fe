@@ -4,20 +4,16 @@ import { createSkilleService, getDetailSkillById, UpdateSkillService } from '../
 import { useFetchAllcode } from '../../../util/fetch';
 import { toast } from 'react-toastify';
 import { useHistory, useParams } from "react-router-dom";
-import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
-import CommonUtils from '../../../util/CommonUtils';
-import { Spinner, Modal } from 'reactstrap'
+import { Modal } from 'reactstrap'
 import '../../../components/modal/modal.css'
 import './AddJobSkill.scss';
 import { Col, Row, Select } from 'antd';
 const AddJobSkill = () => {
+    const history = useHistory()
     const [isActionADD, setisActionADD] = useState(true)
-
     const [isLoading, setIsLoading] = useState(false)
-
     const { code } = useParams();
-
     const [inputValues, setInputValues] = useState({
         name: '', categoryJobCode: '', id: ''
     });
@@ -26,7 +22,7 @@ const AddJobSkill = () => {
         setisActionADD(false)
         let skill = await getDetailSkillById(code)
         if (skill && skill.errCode === 0) {
-            setInputValues({ ...inputValues, ["name"]: skill.data.name, ["id"]: skill.data.id, ["categoryJobCode"]: skill.data.categoryJobCode  })
+            setInputValues({ ...inputValues, name: skill.data?.name, id: skill.data?.id, categoryJobCode: skill.data?.categoryJobCode  })
         }
     }
 
@@ -68,8 +64,8 @@ const AddJobSkill = () => {
                     toast.success("Thêm kĩ năng thành công")
                     setInputValues({
                         ...inputValues,
-                        ["name"]: '',
-                        ["categoryJobCode"]: '',
+                        name: '',
+                        categoryJobCode: '',
                     })
                 }
                 else if (res && res.errCode === 2) {
@@ -96,7 +92,6 @@ const AddJobSkill = () => {
             }, 50);
         }
     }
-    const history = useHistory()
     return (
         <div className=''>
             <div className="col-12 grid-margin">

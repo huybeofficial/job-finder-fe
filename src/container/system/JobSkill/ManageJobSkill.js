@@ -7,17 +7,17 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-image-lightbox/style.css';
 import CommonUtils from '../../../util/CommonUtils';
-import {Input, Modal, Row, Col, Select} from 'antd'
+import { Input, Modal, Row, Col, Select } from 'antd'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useFetchAllcode } from '../../../util/fetch';
-const {confirm} = Modal
+const { confirm } = Modal
 
 const ManageJobSkill = () => {
     const [dataJobSkill, setdataJobSkill] = useState([])
     const [count, setCount] = useState('')
     const [numberPage, setnumberPage] = useState('')
-    const [search,setSearch] = useState('')
-    const [categoryJobCode,setCategoryJobCode] = useState('')
+    const [search, setSearch] = useState('')
+    const [categoryJobCode, setCategoryJobCode] = useState('')
     useEffect(() => {
         try {
             let fetchData = async () => {
@@ -38,10 +38,10 @@ const ManageJobSkill = () => {
             console.log(error)
         }
 
-    }, [search,categoryJobCode])
+    }, [search, categoryJobCode])
 
     let { data: listCategoryJobCode } = useFetchAllcode('JOBTYPE');
-    listCategoryJobCode = listCategoryJobCode.map(item=> ({
+    listCategoryJobCode = listCategoryJobCode.map(item => ({
         value: item.code,
         label: item.value
     }))
@@ -82,7 +82,7 @@ const ManageJobSkill = () => {
 
         }
     }
-    let handleOnChangeCategoryJobCode = async(value) => {
+    let handleOnChangeCategoryJobCode = async (value) => {
         setCategoryJobCode(value)
     }
     const handleSearch = (value) => {
@@ -91,14 +91,14 @@ const ManageJobSkill = () => {
     const confirmDelete = (id) => {
         confirm({
             title: 'Bạn có chắc muốn xóa kĩ năng này?',
-            icon: <ExclamationCircleOutlined />,    
+            icon: <ExclamationCircleOutlined />,
             onOk() {
                 handleDeleteJobSkill(id)
             },
-        
+
             onCancel() {
             },
-          });
+        });
     }
     return (
         <div>
@@ -108,13 +108,13 @@ const ManageJobSkill = () => {
                         <h4 className="card-title">Danh sách các kĩ năng</h4>
                         <Row justify='space-around' className='mt-5 mb-5'>
                             <Col xs={12} xxl={12}>
-                        <Input.Search  onSearch={handleSearch} placeholder="Nhập tên kĩ năng " allowClear enterButton="Tìm kiếm">
-                        </Input.Search>
+                                <Input.Search onSearch={handleSearch} placeholder="Nhập tên kĩ năng " allowClear enterButton="Tìm kiếm">
+                                </Input.Search>
                             </Col>
                             <Col xs={8} xxl={8}>
                                 <label className='mr-2'>Loại trạng thái: </label>
-                                <Select onChange={(value)=> handleOnChangeCategoryJobCode(value)} defaultValue={listCategoryJobCode[0]} style={{width:'50%'}} size='default' options={listCategoryJobCode ? listCategoryJobCode : []}>
-                                    
+                                <Select onChange={(value) => handleOnChangeCategoryJobCode(value)} defaultValue={listCategoryJobCode[0]} style={{ width: '50%' }} size='default' options={listCategoryJobCode ? listCategoryJobCode : []}>
+
                                 </Select>
                             </Col>
 
@@ -159,18 +159,18 @@ const ManageJobSkill = () => {
                                 </tbody>
                             </table>
                             {
-                                            dataJobSkill && dataJobSkill.length == 0 && (
-                                                <div style={{ textAlign: 'center' }}>
+                                dataJobSkill && dataJobSkill.length == 0 && (
+                                    <div style={{ textAlign: 'center' }}>
 
-                                                    Không có dữ liệu
+                                        Không có dữ liệu
 
-                                                </div>
-                                            )
+                                    </div>
+                                )
                             }
                         </div>
                     </div>
                     <ReactPaginate
-                    forcePage={numberPage}
+                        forcePage={numberPage}
                         previousLabel={'Quay lại'}
                         nextLabel={'Tiếp'}
                         breakLabel={'...'}
