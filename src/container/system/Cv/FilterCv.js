@@ -5,28 +5,39 @@ import { getAllSkillByJobCode, getDetailCompanyByUserId } from '../../../service
 import { useFetchAllcode } from '../../../util/fetch';
 import { PAGINATION } from '../../../util/constant';
 import ReactPaginate from 'react-paginate';
-import { Link, useHistory } from 'react-router-dom';
-import { useParams } from "react-router-dom";
+import {  useHistory } from 'react-router-dom';
 import { Col, Row, Select, Modal } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-
 const {confirm} = Modal
 
-
 const FilterCv = () => {
+    let history = useHistory()
     const [dataCv, setdataCv] = useState([])
     const [count, setCount] = useState('')
     const [numberPage, setnumberPage] = useState('')
     const [isFirstTime, setIsFirstTime] = useState(true)
-    const [inputValue, setInputValue] = useState({
-        categoryJobCode: '', experienceJobCode: '', listSkills: [], provinceCode: '', salaryCode: ''
-    })
     const [listSkills, setListSkills] = useState([])
     const [isHiddenPercent, setIsHiddenPercent] = useState(true)
     const [companySeeAllow,setCompanySeeAllow] = useState({
         free:0,
         notFree: 0
     })
+    const [inputValue, setInputValue] = useState({
+        categoryJobCode: '', experienceJobCode: '', listSkills: [], provinceCode: '', salaryCode: ''
+    })
+    useEffect(() => {
+        try {
+            let userData = JSON.parse(localStorage.getItem("userData"))
+            fetchData();
+            if (isFirstTime) {
+                fetchCompany(userData.id, userData.companyId)
+                setIsFirstTime(false)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }, [inputValue])
+
     let fetchCompany = async (userId, companyId = null) => {
         let res = await getDetailCompanyByUserId(userId, companyId)
         if (res && res.errCode === 0) {
@@ -36,7 +47,6 @@ const FilterCv = () => {
             })
         }
     }
-    let history = useHistory()
     const confirmSeeCandiate = (id) => {
         confirm({
             title: 'Khi xem bạn sẽ mất 1 lần xem thông tin ứng viên',
@@ -75,18 +85,6 @@ const FilterCv = () => {
             setCount(Math.ceil(arrData.count / PAGINATION.pagerow))
         }
     }
-    useEffect(() => {
-        try {
-            let userData = JSON.parse(localStorage.getItem("userData"))
-            fetchData();
-            if (isFirstTime) {
-                fetchCompany(userData.id,userData.companyId)
-                setIsFirstTime(false)
-            }
-        } catch (error) {
-            console.log(error)
-        }
-    }, [inputValue])
 
     let { data: dataProvince } = useFetchAllcode('PROVINCE');
     let { data: dataExp } = useFetchAllcode('EXPTYPE')
