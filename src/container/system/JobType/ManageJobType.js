@@ -1,7 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import { DeleteAllcodeService, getListAllCodeService } from '../../../service/userService';
-import moment from 'moment';
 import { PAGINATION } from '../../../util/constant';
 import ReactPaginate from 'react-paginate';
 import { Link } from 'react-router-dom';
@@ -9,9 +8,9 @@ import { toast } from 'react-toastify';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 import CommonUtils from '../../../util/CommonUtils';
-import {Input, Modal} from 'antd'
+import { Input, Modal } from 'antd'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-const {confirm} = Modal
+const { confirm } = Modal
 
 const ManageJobType = () => {
     const [dataJobType, setdataJobType] = useState([])
@@ -19,7 +18,7 @@ const ManageJobType = () => {
     const [numberPage, setnumberPage] = useState('')
     const [imgPreview, setimgPreview] = useState('')
     const [isOpen, setisOpen] = useState(false)
-    const [search,setSearch] = useState('')
+    const [search, setSearch] = useState('')
     useEffect(() => {
         try {
             let fetchData = async () => {
@@ -83,14 +82,14 @@ const ManageJobType = () => {
     const confirmDelete = (id) => {
         confirm({
             title: 'Bạn có chắc muốn xóa lĩnh vực này này?',
-            icon: <ExclamationCircleOutlined />,    
+            icon: <ExclamationCircleOutlined />,
             onOk() {
                 handleDeleteJobType(id)
             },
-        
+
             onCancel() {
             },
-          });
+        });
     }
     return (
         <div>
@@ -99,8 +98,8 @@ const ManageJobType = () => {
                     <div className="card-body">
                         <h4 className="card-title">Danh sách loại công việc</h4>
                         <Input.Search onSearch={handleSearch} className='mt-5 mb-5' placeholder="Nhập tên công việc" allowClear enterButton="Tìm kiếm">
-                                    
-                                    </Input.Search>
+
+                        </Input.Search>
                         <div className="table-responsive pt-2">
                             <table className="table table-bordered">
                                 <thead>
@@ -145,18 +144,18 @@ const ManageJobType = () => {
                                 </tbody>
                             </table>
                             {
-                                            dataJobType && dataJobType.length == 0 && (
-                                                <div style={{ textAlign: 'center' }}>
+                                dataJobType && dataJobType.length == 0 && (
+                                    <div style={{ textAlign: 'center' }}>
 
-                                                    Không có dữ liệu
+                                        Không có dữ liệu
 
-                                                </div>
-                                            )
+                                    </div>
+                                )
                             }
                         </div>
                     </div>
                     <ReactPaginate
-                    forcePage={numberPage}
+                        forcePage={numberPage}
                         previousLabel={'Quay lại'}
                         nextLabel={'Tiếp'}
                         breakLabel={'...'}

@@ -1,25 +1,19 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import { createAllCodeService, getDetailAllcodeByCode, UpdateAllcodeService } from '../../../service/userService';
-import { useFetchAllcode } from '../../../util/fetch';
-import DatePicker from '../../../components/input/DatePicker';
 import { toast } from 'react-toastify';
 import { useHistory, useParams } from "react-router-dom";
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 import CommonUtils from '../../../util/CommonUtils';
-import { Spinner, Modal } from 'reactstrap'
+import { Modal } from 'reactstrap'
 import '../../../components/modal/modal.css'
 import './AddJobType.scss';
 const AddJobType = () => {
-
-
+    const history = useHistory()
     const [isActionADD, setisActionADD] = useState(true)
-
     const [isLoading, setIsLoading] = useState(false)
-
     const { code } = useParams();
-
     const [inputValues, setInputValues] = useState({
         value: '', code: '', image: '', imageReview: '', isOpen: false,
     });
@@ -31,7 +25,7 @@ const AddJobType = () => {
                 setisActionADD(false)
                 let allcode = await getDetailAllcodeByCode(code)
                 if (allcode && allcode.errCode === 0) {
-                    setInputValues({ ...inputValues, ["value"]: allcode.data.value, ["code"]: allcode.data.code, ["image"]: allcode.data.image, ["imageReview"]: allcode.data.image })
+                    setInputValues({ ...inputValues, value: allcode.data?.value, code: allcode.data?.code, image: allcode.data?.image, imageReview: allcode.data?.image })
                 }
             }
             fetchDetailJobType()
@@ -59,14 +53,14 @@ const AddJobType = () => {
             let base64 = await CommonUtils.getBase64(file);
             let objectUrl = URL.createObjectURL(file)
 
-            setInputValues({ ...inputValues, ["image"]: base64, ["imageReview"]: objectUrl })
+            setInputValues({ ...inputValues, image: base64, imageReview: objectUrl })
 
         }
     }
     let openPreviewImage = () => {
         if (!inputValues.imageReview) return;
 
-        setInputValues({ ...inputValues, ["isOpen"]: true })
+        setInputValues({ ...inputValues, isOpen: true })
     }
     let handleSaveJobType = async () => {
         setIsLoading(true)
@@ -83,10 +77,10 @@ const AddJobType = () => {
                     toast.success("Thêm loại công việc thành công")
                     setInputValues({
                         ...inputValues,
-                        ["value"]: '',
-                        ["code"]: '',
-                        ["image"]: '',
-                        ["imageReview"]: ''
+                        value: '',
+                        code: '',
+                        image: '',
+                        imageReview: ''
                     })
                 }
                 else if (res && res.errCode === 2) {
@@ -113,7 +107,6 @@ const AddJobType = () => {
             }, 50);
         }
     }
-    const history = useHistory()
     return (
         <div className=''>
             <div className="col-12 grid-margin">
@@ -177,7 +170,7 @@ const AddJobType = () => {
             {
                 inputValues.isOpen === true &&
                 <Lightbox mainSrc={inputValues.imageReview}
-                    onCloseRequest={() => setInputValues({ ...inputValues, ["isOpen"]: false })}
+                    onCloseRequest={() => setInputValues({ ...inputValues, isOpen: false })}
                 />
             }
             {isLoading &&

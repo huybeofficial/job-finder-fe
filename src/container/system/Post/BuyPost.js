@@ -48,7 +48,7 @@ const BuyPost = () => {
             window.location.href = res.link
         }
         else {
-            toast.errorr(res.errMessage)
+            toast.error(res.errMessage)
             setIsLoading(false)
         }
     }
