@@ -3,19 +3,15 @@ import { useEffect, useState } from 'react';
 import { createAllCodeService, getDetailAllcodeByCode, UpdateAllcodeService } from '../../../service/userService';
 import { toast } from 'react-toastify';
 import { useHistory, useParams } from "react-router-dom";
-import { Spinner, Modal } from 'reactstrap'
+import { Modal } from 'reactstrap'
 import '../../../components/modal/modal.css'
 import CommonUtils from '../../../util/CommonUtils';
 
 const AddWorkType = () => {
-
-
+    const history = useHistory()
     const [isActionADD, setisActionADD] = useState(true)
-
     const [isLoading, setIsLoading] = useState(false)
-
     const { id } = useParams();
-
     const [inputValues, setInputValues] = useState({
         value: '', code: ''
     });
@@ -27,23 +23,12 @@ const AddWorkType = () => {
                 setisActionADD(false)
                 let allcode = await getDetailAllcodeByCode(id)
                 if (allcode && allcode.errCode === 0) {
-                    setInputValues({ ...inputValues, ["value"]: allcode.data.value, ["code"]: allcode.data.code })
+                    setInputValues({ ...inputValues, value: allcode.data?.value, code: allcode.data?.code })
                 }
             }
             fetchDetailWorkType()
         }
     }, [])
-
-    useEffect(() => {
-        const delayDebounceFn = setTimeout(() => {
-            setInputValues({
-                ...inputValues,
-                value: CommonUtils.removeSpace(inputValues.value)
-            })
-        }, 50)
-    
-        return () => clearTimeout(delayDebounceFn)
-      }, [inputValues.value])
 
     const handleOnChange = event => {
         const { name, value } = event.target;
@@ -75,9 +60,10 @@ const AddWorkType = () => {
                     toast.success("Thêm hình thức thành công")
                     setInputValues({
                         ...inputValues,
-                        ["value"]: '',
-                        ["code"]: '',
+                        value: '',
+                        code: '',
                     })
+                    return history.push("/admin/list-work-type/")
                 }
                 else if (res && res.errCode === 2) {
                     toast.error(res.errMessage)
@@ -93,7 +79,7 @@ const AddWorkType = () => {
                 setIsLoading(false)
                 if (res && res.errCode === 0) {
                     toast.success("Cập nhật hình thức thành công")
-
+                    return history.push("/admin/list-work-type/")
                 }
                 else if (res && res.errCode === 2) {
                     toast.error(res.errMessage)
@@ -102,13 +88,12 @@ const AddWorkType = () => {
             }, 50);
         }
     }
-    const history = useHistory()
     return (
         <div className=''>
             <div className="col-12 grid-margin">
                 <div className="card">
                     <div className="card-body">
-                    <div onClick={()=> history.goBack()} className='mb-2 hover-pointer' style={{color:'red'}}><i class="fa-solid fa-arrow-left mr-2"></i>Quay lại</div>
+                        <div onClick={() => history.goBack()} className='mb-2 hover-pointer' style={{ color: 'red' }}><i class="fa-solid fa-arrow-left mr-2"></i>Quay lại</div>
                         <h4 className="card-title">{isActionADD === true ? 'Thêm mới hình thức làm việc' : 'Cập nhật hình thức làm việc'}</h4>
                         <br></br>
                         <form className="form-sample">
@@ -149,7 +134,7 @@ const AddWorkType = () => {
                         position: 'absolute', right: '50%',
                         justifyContent: 'center', alignItems: 'center'
                     }}>
-                       <div class="spinner-border" role="status">
+                        <div class="spinner-border" role="status">
                             <span class="visually-hidden"></span>
                         </div>
                     </div>

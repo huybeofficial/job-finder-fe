@@ -1,21 +1,20 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import { DeleteAllcodeService, getListAllCodeService } from '../../../service/userService';
-import moment from 'moment';
 import { PAGINATION } from '../../../util/constant';
 import ReactPaginate from 'react-paginate';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import CommonUtils from '../../../util/CommonUtils';
-import {Input, Modal} from 'antd'
+import { Input, Modal } from 'antd'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-const {confirm} = Modal
+const { confirm } = Modal
 
 const ManageWorkType = () => {
-    const [dataWorkType, setdataWorkType] = useState([])
+    const [dataWorkType, setDataWorkType] = useState([])
     const [count, setCount] = useState('')
-    const [numberPage, setnumberPage] = useState('')
-    const [search,setSearch] = useState('')
+    const [numberPage, setNumberPage] = useState('')
+    const [search, setSearch] = useState('')
 
     useEffect(() => {
         try {
@@ -29,8 +28,8 @@ const ManageWorkType = () => {
 
                 })
                 if (arrData && arrData.errCode === 0) {
-                    setdataWorkType(arrData.data)
-                    setnumberPage(0)
+                    setDataWorkType(arrData.data)
+                    setNumberPage(0)
                     setCount(Math.ceil(arrData.count / PAGINATION.pagerow))
                 }
             }
@@ -54,14 +53,14 @@ const ManageWorkType = () => {
 
             })
             if (arrData && arrData.errCode === 0) {
-                setdataWorkType(arrData.data)
+                setDataWorkType(arrData.data)
                 setCount(Math.ceil(arrData.count / PAGINATION.pagerow))
             }
 
         } else toast.error(res.errMessage)
     }
     let handleChangePage = async (number) => {
-        setnumberPage(number.selected)
+        setNumberPage(number.selected)
         let arrData = await getListAllCodeService({
 
             type: 'WORKTYPE',
@@ -72,7 +71,7 @@ const ManageWorkType = () => {
 
         })
         if (arrData && arrData.errCode === 0) {
-            setdataWorkType(arrData.data)
+            setDataWorkType(arrData.data)
 
         }
     }
@@ -82,14 +81,14 @@ const ManageWorkType = () => {
     const confirmDelete = (id) => {
         confirm({
             title: 'Bạn có chắc muốn xóa hình thức làm việc này?',
-            icon: <ExclamationCircleOutlined />,    
+            icon: <ExclamationCircleOutlined />,
             onOk() {
                 handleDeleteWorkType(id)
             },
-        
+
             onCancel() {
             },
-          });
+        });
     }
     return (
         <div>
@@ -98,8 +97,8 @@ const ManageWorkType = () => {
                     <div className="card-body">
                         <h4 className="card-title">Danh sách hình thức làm việc</h4>
                         <Input.Search onSearch={handleSearch} className='mt-5 mb-5' placeholder="Nhập tên hình thức" allowClear enterButton="Tìm kiếm">
-                                    
-                                    </Input.Search>
+
+                        </Input.Search>
                         <div className="table-responsive pt-2">
                             <table className="table table-bordered">
                                 <thead>
@@ -141,18 +140,18 @@ const ManageWorkType = () => {
                                 </tbody>
                             </table>
                             {
-                                            dataWorkType && dataWorkType.length == 0 && (
-                                                <div style={{ textAlign: 'center' }}>
+                                dataWorkType && dataWorkType.length == 0 && (
+                                    <div style={{ textAlign: 'center' }}>
 
-                                                    Không có dữ liệu
+                                        Không có dữ liệu
 
-                                                </div>
-                                            )
-                                        }
+                                    </div>
+                                )
+                            }
                         </div>
                     </div>
                     <ReactPaginate
-                    forcePage={numberPage}
+                        forcePage={numberPage}
                         previousLabel={'Quay lại'}
                         nextLabel={'Tiếp'}
                         breakLabel={'...'}
