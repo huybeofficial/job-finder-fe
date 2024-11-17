@@ -178,65 +178,65 @@ const Menu = () => {
               </li>
             </>
           }
-                {user && (user.roleCode === "COMPANY") &&
-                    <>
-                        <li className="nav-item relative">
-                            <a className="nav-link" data-toggle="collapse" href="#company" aria-expanded="false" aria-controls="company">
-                                <i class="fa-solid fa-clipboard menu-icon"></i>
-                                <span className="menu-title">Quản lý công ty</span>
-                                <i className="menu-arrow" />
-                            </a>
-                            <div className="collapse" id="company">
-                                <ul className="nav flex-column sub-menu">
-                                    <li className="nav-item relative"> <Link className="nav-link" to="/admin/edit-company/">Quản lý công ty</Link ></li>
-                                    <li className="nav-item relative"> <Link className="nav-link" to="/admin/recruitment/">Tuyển dụng vào công ty</Link ></li>
-                                    <li className="nav-item relative"> <Link className="nav-link" to="/admin/list-employer/">Danh sách nhân viên</Link ></li>
-                                    <li className="nav-item relative"> <Link className="nav-link" to="/admin/add-user/">Thêm nhân viên</Link ></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li className="nav-item relative">
-                            <a className="nav-link" data-toggle="collapse" href="#post" aria-expanded="false" aria-controls="post">
-                                <i class="fa-solid fa-clipboard menu-icon"></i>
-                                <span className="menu-title">Quản lý bài đăng</span>
-                                <i className="menu-arrow" />
-                            </a>
-                            <div className="collapse" id="post">
-                                <ul className="nav flex-column sub-menu">
-                                    <li className="nav-item relative"> <Link className="nav-link" to="/admin/add-post/">Tạo mới bài đăng</Link ></li>
-                                    <li className="nav-item relative"> <Link className="nav-link" to="/admin/list-post/">Danh sách bài đăng</Link ></li>
-                                    <li className="nav-item relative"> <Link className="nav-link" to="/admin/buy-post/">Mua thêm lượt đăng bài</Link ></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li className="nav-item relative">
-                            <a className="nav-link" data-toggle="collapse" href="#findCandiate" aria-expanded="false" aria-controls="findCandiate">
-                                <i className="icon-head menu-icon"></i>
-                                <span className="menu-title">Tìm kiếm ứng viên</span>
-                                <i className="menu-arrow" />
-                            </a>
-                            <div className="collapse" id="findCandiate">
-                                <ul className="nav flex-column sub-menu">
-                                    <li className="nav-item relative"> <Link className="nav-link" to="/admin/buy-cv/">Mua thêm lượt xem ứng viên</Link ></li>
-                                    <li className="nav-item relative"> <Link className="nav-link" to="/admin/list-candiate/">Danh sách ứng viên</Link ></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li className="nav-item relative">
-                            <a className="nav-link" data-toggle="collapse" href="#historyTrade" aria-expanded="false" aria-controls="historyTrade">
-                                <i className="fas fa-money-check-alt menu-icon"></i>
-                                <span className="menu-title">Lịch sử giao dịch</span>
-                                <i className="menu-arrow" />
-                            </a>
-                            <div className="collapse" id="historyTrade">
-                                <ul className="nav flex-column sub-menu">
-                                    <li className="nav-item relative"> <Link className="nav-link" to="/admin/history-post/">Lịch sử gói bài đăng</Link ></li>
-                                    <li className="nav-item relative"> <Link className="nav-link" to="/admin/history-cv/">Lịch sử gói xem ứng viên</Link ></li>
-                                </ul>
-                            </div>
-                        </li>
-                    </>
-                }
+          {user && (user.roleCode === "COMPANY") &&
+            <>
+              <li className="nav-item relative">
+                <a className="nav-link" data-toggle="collapse" href="#company" aria-expanded="false" aria-controls="company">
+                  <i class="fa-solid fa-clipboard menu-icon"></i>
+                  <span className="menu-title">Quản lý công ty</span>
+                  <i className="menu-arrow" />
+                </a>
+                <div className="collapse" id="company">
+                  <ul className="nav flex-column sub-menu">
+                    <li className="nav-item relative"> <Link className="nav-link" to="/admin/edit-company/">Quản lý công ty</Link ></li>
+                    <li className="nav-item relative"> <Link className="nav-link" to="/admin/recruitment/">Tuyển dụng vào công ty</Link ></li>
+                    <li className="nav-item relative"> <Link className="nav-link" to="/admin/list-employer/">Danh sách nhân viên</Link ></li>
+                    <li className="nav-item relative"> <Link className="nav-link" to="/admin/add-user/">Thêm nhân viên</Link ></li>
+                  </ul>
+                </div>
+              </li>
+              <li className="nav-item relative">
+                <a className="nav-link" data-toggle="collapse" href="#post" aria-expanded="false" aria-controls="post">
+                  <i class="fa-solid fa-clipboard menu-icon"></i>
+                  <span className="menu-title">Quản lý bài đăng</span>
+                  <i className="menu-arrow" />
+                </a>
+                <div className="collapse" id="post">
+                  <ul className="nav flex-column sub-menu">
+                    <li className="nav-item relative"> <Link className="nav-link" to="/admin/add-post/">Tạo mới bài đăng</Link ></li>
+                    <li className="nav-item relative"> <Link className="nav-link" to="/admin/list-post/">Danh sách bài đăng</Link ></li>
+                    <li className="nav-item relative"> <Link className="nav-link" to="/admin/buy-post/">Mua thêm lượt đăng bài</Link ></li>
+                  </ul>
+                </div>
+              </li>
+              <li className="nav-item relative">
+                <a className="nav-link" data-toggle="collapse" href="#findCandiate" aria-expanded="false" aria-controls="findCandiate">
+                  <i className="icon-head menu-icon"></i>
+                  <span className="menu-title">Tìm kiếm ứng viên</span>
+                  <i className="menu-arrow" />
+                </a>
+                <div className="collapse" id="findCandiate">
+                  <ul className="nav flex-column sub-menu">
+                    <li className="nav-item relative"> <Link className="nav-link" to="/admin/buy-cv/">Mua thêm lượt xem ứng viên</Link ></li>
+                    <li className="nav-item relative"> <Link className="nav-link" to="/admin/list-candiate/">Danh sách ứng viên</Link ></li>
+                  </ul>
+                </div>
+              </li>
+              <li className="nav-item relative">
+                <a className="nav-link" data-toggle="collapse" href="#historyTrade" aria-expanded="false" aria-controls="historyTrade">
+                  <i className="fas fa-money-check-alt menu-icon"></i>
+                  <span className="menu-title">Lịch sử giao dịch</span>
+                  <i className="menu-arrow" />
+                </a>
+                <div className="collapse" id="historyTrade">
+                  <ul className="nav flex-column sub-menu">
+                    <li className="nav-item relative"> <Link className="nav-link" to="/admin/history-post/">Lịch sử gói bài đăng</Link ></li>
+                    <li className="nav-item relative"> <Link className="nav-link" to="/admin/history-cv/">Lịch sử gói xem ứng viên</Link ></li>
+                  </ul>
+                </div>
+              </li>
+            </>
+          }
 
                 {user && (user.roleCode === "EMPLOYER") &&
                     <>
