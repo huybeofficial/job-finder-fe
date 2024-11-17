@@ -1,18 +1,18 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import { getAllPackageCv, setActiveTypePackageCv } from '../../../service/userService';
-import moment from 'moment';
 import { PAGINATION } from '../../../util/constant';
 import ReactPaginate from 'react-paginate';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import CommonUtils from '../../../util/CommonUtils';
-import {Input} from 'antd'
+import { Input } from 'antd'
+
 const ManagePackageCv = () => {
     const [dataPackagePost, setDataPackagePost] = useState([])
     const [count, setCount] = useState('')
-    const [numberPage, setnumberPage] = useState('')
-    const [search,setSearch] = useState('')
+    const [numberPage, setNumberPage] = useState('')
+    const [search, setSearch] = useState('')
 
     useEffect(() => {
         try {
@@ -25,7 +25,7 @@ const ManagePackageCv = () => {
                 })
                 if (arrData && arrData.errCode === 0) {
                     setDataPackagePost(arrData.data)
-                    setnumberPage(0)
+                    setNumberPage(0)
                     setCount(Math.ceil(arrData.count / PAGINATION.pagerow))
                 }
             }
@@ -35,7 +35,7 @@ const ManagePackageCv = () => {
         }
 
     }, [search])
-    let hanndleSetActivePackage = async (event,id, isActive) => {
+    let handleSetActivePackage = async (event, id, isActive) => {
         event.preventDefault();
         let res = await setActiveTypePackageCv({
             id: id,
@@ -57,7 +57,7 @@ const ManagePackageCv = () => {
         } else toast.error(res.errMessage)
     }
     let handleChangePage = async (number) => {
-        setnumberPage(number.selected)
+        setNumberPage(number.selected)
         let arrData = await getAllPackageCv({
             limit: PAGINATION.pagerow,
             offset: number.selected * PAGINATION.pagerow,
@@ -79,8 +79,8 @@ const ManagePackageCv = () => {
                     <div className="card-body">
                         <h4 className="card-title">Danh sách các gói tìm ứng viên</h4>
                         <Input.Search onSearch={handleSearch} className='mt-5 mb-5' placeholder="Nhập tên gói" allowClear enterButton="Tìm kiếm">
-                                    
-                                    </Input.Search>
+
+                        </Input.Search>
                         <div className="table-responsive pt-2">
                             <table className="table table-bordered">
                                 <thead>
@@ -121,9 +121,9 @@ const ManagePackageCv = () => {
                                                         &nbsp; &nbsp;
                                                         {item.isActive == 1 ? (
                                                             <>
-                                                                <a style={{ color: '#ac7649' }} href="#" onClick={(event) => hanndleSetActivePackage(event,item.id,0)} >Dừng kinh doanh</a>
+                                                                <a style={{ color: '#ac7649' }} href="#" onClick={(event) => handleSetActivePackage(event, item.id, 0)} >Dừng kinh doanh</a>
                                                             </>) : (<>
-                                                                <a style={{ color: '#ac7649' }} href="#" onClick={(event) => hanndleSetActivePackage(event,item.id,1)} >Mở kinh doanh</a>
+                                                                <a style={{ color: '#ac7649' }} href="#" onClick={(event) => handleSetActivePackage(event, item.id, 1)} >Mở kinh doanh</a>
                                                             </>)
                                                         }
                                                     </td>
@@ -135,18 +135,18 @@ const ManagePackageCv = () => {
                                 </tbody>
                             </table>
                             {
-                                            dataPackagePost && dataPackagePost.length == 0 && (
-                                                <div style={{ textAlign: 'center' }}>
+                                dataPackagePost && dataPackagePost.length == 0 && (
+                                    <div style={{ textAlign: 'center' }}>
 
-                                                    Không có dữ liệu
+                                        Không có dữ liệu
 
-                                                </div>
-                                            )
+                                    </div>
+                                )
                             }
                         </div>
                     </div>
                     <ReactPaginate
-                                        forcePage={numberPage}
+                        forcePage={numberPage}
 
                         previousLabel={'Quay lại'}
                         nextLabel={'Tiếp'}

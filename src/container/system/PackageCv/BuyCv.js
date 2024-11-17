@@ -2,10 +2,8 @@ import React from 'react'
 import { useEffect, useState } from 'react';
 import {  getPaymentLinkCv, getAllToSelect } from '../../../service/userService';
 import { toast } from 'react-toastify';
-import { useHistory, useParams } from "react-router-dom";
-import { Spinner, Modal } from 'reactstrap'
+import { Modal } from 'reactstrap'
 const BuyCv = () => {
-    const history = useHistory()
     const [inputValues, setInputValues] = useState({
        amount: 1, packageCvId: ''
     });
@@ -13,6 +11,11 @@ const BuyCv = () => {
     const [dataPackage, setDataPackage] = useState([])
     const [price, setPrice] = useState(0)
     const [total, setTotal] = useState(0)
+
+    useEffect(() => {
+        fetchPackagePost()
+    }, [])
+    
     const handleOnChangePackage = event => {
         const { value } = event.target;
         let item = dataPackage.find(item => item.id == value)
@@ -45,7 +48,7 @@ const BuyCv = () => {
             window.location.href = res.link
         }
         else {
-            toast.errorr(res.errMessage)
+            toast.error(res.errMessage)
             setIsLoading(false)
         }
     }
@@ -59,9 +62,7 @@ const BuyCv = () => {
         setPrice(res.data[0].price)
         setTotal(res.data[0].price * inputValues.amount)
     }
-    useEffect(() => {
-        fetchPackagePost()
-    }, [])
+    
     return (
         <div className=''>
             <div className="col-12 grid-margin">

@@ -3,17 +3,13 @@ import { useEffect, useState } from 'react';
 import { getPackageByIdCv , createPackageCv , updatePackageCv } from '../../../service/userService';
 import { toast } from 'react-toastify';
 import { useHistory, useParams } from "react-router-dom";
-import { Spinner, Modal } from 'reactstrap'
+import { Modal } from 'reactstrap'
 import '../../../components/modal/modal.css'
 const AddpackageCv = () => {
-
-
+    const history = useHistory()
     const [isActionADD, setisActionADD] = useState(true)
     const [isLoading, setIsLoading] = useState(false)
-
-
     const { id } = useParams();
-
     const [inputValues, setInputValues] = useState({
         value: '', price: ''  , name: ''
     });
@@ -24,7 +20,7 @@ const AddpackageCv = () => {
                 setisActionADD(false)
                 let res = await getPackageByIdCv(id)
                 if (res && res.errCode === 0) {
-                    setInputValues({ ...inputValues, ["value"]: res.data.value, ["id"]: res.data.id , ["price"] : res.data.price , ["name"] : res.data.name })
+                    setInputValues({ ...inputValues, value: res.data?.value, id: res.data?.id , price : res.data?.price , name : res.data?.name })
                 }
             }
             fetchDetailPackagePost()
@@ -50,7 +46,7 @@ const AddpackageCv = () => {
                     toast.success(res.errMessage)
                     setInputValues({
                         ...inputValues,
-                        ["value"]: '',
+                        value: '',
                         price: '',
                         name: ''
                     })
@@ -79,7 +75,6 @@ const AddpackageCv = () => {
             }, 500);
         }
     }
-    const history = useHistory()
     return (
         <div className=''>
             <div className="col-12 grid-margin">
