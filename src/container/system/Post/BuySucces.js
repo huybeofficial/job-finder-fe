@@ -1,25 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import {paymentOrderSuccessService} from '../../../service/userService'
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    Redirect,
-    useParams,
-    useLocation,
-    useHistory
-} from "react-router-dom";
+import {useLocation, useHistory } from "react-router-dom";
 
 
 function useQuery() {
     const { search } = useLocation();
-    
     return React.useMemo(() => new URLSearchParams(search), [search]);
-  }
+}
 
 function PaymentSuccess(props) {
+    const history = useHistory()
     let query = useQuery();
     const [message, setMessage] = useState("Đang xử lý")
     useEffect(() => {
@@ -44,7 +35,6 @@ function PaymentSuccess(props) {
             toast.error(res.errMessage)
         }
     }
-    const history = useHistory()
     return (
 
         <div style={{height:'50vh',textAlign:'center'}}> 

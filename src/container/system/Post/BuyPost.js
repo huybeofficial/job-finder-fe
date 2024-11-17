@@ -2,10 +2,9 @@ import React from 'react'
 import { useEffect, useState } from 'react';
 import { getPackageByType, getPaymentLink } from '../../../service/userService';
 import { toast } from 'react-toastify';
-import { useHistory, useParams } from "react-router-dom";
-import { Spinner, Modal } from 'reactstrap'
+import { Modal } from 'reactstrap'
+
 const BuyPost = () => {
-    const history = useHistory()
     const [inputValues, setInputValues] = useState({
        amount: 1, packageId: ''
     });
