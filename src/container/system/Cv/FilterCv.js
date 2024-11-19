@@ -277,12 +277,12 @@ const FilterCv = () => {
                                         {
                                             !isHiddenPercent &&
                                             <>
-                                            <th>
-                                                Tỉ lệ phù hợp
-                                            </th>
-                                            <th>
-                                                Đánh giá
-                                            </th>
+                                                <th>
+                                                    Tỉ lệ phù hợp
+                                                </th>
+                                                <th>
+                                                    Đánh giá
+                                                </th>
                                             </>
                                         }
                                         <th>
@@ -302,8 +302,8 @@ const FilterCv = () => {
                                                     {
                                                         !isHiddenPercent &&
                                                         <>
-                                                        <td>{item.file}</td>
-                                                        <td><label className={+item.file.split('%')[0] >= 70 ? 'badge badge-success' : (+item.file.split('%')[0] > 30 ? 'badge badge-warning'  : 'badge badge-danger')}>{+item.file.split('%')[0] >= 70 ? 'Tốt' : (+item.file.split('%')[0] > 30 ? 'Tạm chấp nhận'  : 'Tệ')}</label></td>
+                                                            <td>{item.file}</td>
+                                                            <td><label className={+item.file.split('%')[0] >= 70 ? 'badge badge-success' : (+item.file.split('%')[0] > 30 ? 'badge badge-warning' : 'badge badge-danger')}>{+item.file.split('%')[0] >= 70 ? 'Tốt' : (+item.file.split('%')[0] > 30 ? 'Tạm chấp nhận' : 'Tệ')}</label></td>
                                                         </>
                                                     }
                                                     <td>
