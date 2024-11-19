@@ -1,6 +1,8 @@
 /* Sidebar */
 
 .sidebar {
+  max-height: 100vh;
+  overflow-y: auto;
   min-height: calc(100vh - #{$navbar-height});
   background: $sidebar-light-bg;
   font-family: $type1;
