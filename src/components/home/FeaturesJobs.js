@@ -6,15 +6,13 @@ const FeaturesJobs = (props) => {
         <>
              <div class="row justify-content-center">
                     <div class="col-xl-10">
-                        {/* <!-- single-job-content --> */}
                         {props.dataFeature.map((data)=>{
                             return(
                                 <Link to={`/detail-job/${data.id}`}>
                                     <FeatureJob key={data.id} data={data}/>
                                 </Link>
                             )
-                        })}
-                        {/* <!-- single-job-content --> */}                
+                        })}               
                     </div>
                 </div>
         </>
