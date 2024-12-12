@@ -1,11 +1,11 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
-import {  getPaymentLinkCv, getAllToSelect } from '../../../service/userService';
+import { getPaymentLinkCv, getAllToSelect } from '../../../service/userService';
 import { toast } from 'react-toastify';
 import { Modal } from 'reactstrap'
 const BuyCv = () => {
     const [inputValues, setInputValues] = useState({
-       amount: 1, packageCvId: ''
+        amount: 1, packageCvId: ''
     });
     const [isLoading, setIsLoading] = useState(false)
     const [dataPackage, setDataPackage] = useState([])
@@ -15,7 +15,7 @@ const BuyCv = () => {
     useEffect(() => {
         fetchPackagePost()
     }, [])
-    
+
     const handleOnChangePackage = event => {
         const { value } = event.target;
         let item = dataPackage.find(item => item.id == value)
@@ -35,13 +35,13 @@ const BuyCv = () => {
         setTotal(value * price)
     }
 
-    const handleBuy = async() => {
+    const handleBuy = async () => {
         setIsLoading(true)
-        let res = await getPaymentLinkCv(inputValues.packageCvId , inputValues.amount)
+        let res = await getPaymentLinkCv(inputValues.packageCvId, inputValues.amount)
         if (res.errCode == 0) {
             let data = {
                 packageCvId: inputValues.packageCvId,
-                amount : inputValues.amount,
+                amount: inputValues.amount,
                 userId: JSON.parse(localStorage.getItem('userData')).id
             }
             localStorage.setItem("orderCvData", JSON.stringify(data))
@@ -52,7 +52,7 @@ const BuyCv = () => {
             setIsLoading(false)
         }
     }
-    const fetchPackagePost = async()=> {
+    const fetchPackagePost = async () => {
         let res = await getAllToSelect()
         setDataPackage(res.data)
         setInputValues({
@@ -62,7 +62,7 @@ const BuyCv = () => {
         setPrice(res.data[0].price)
         setTotal(res.data[0].price * inputValues.amount)
     }
-    
+
     return (
         <div className=''>
             <div className="col-12 grid-margin">
@@ -94,7 +94,7 @@ const BuyCv = () => {
                                     <div className="form-group row">
                                         <label className="col-sm-3 col-form-label">Đơn giá</label>
                                         <div className="col-sm-9">
-                                                <p className='mt-2'>{price} USD</p>
+                                            <p className='mt-2'>{price} USD</p>
                                         </div>
                                     </div>
                                 </div>
@@ -135,7 +135,7 @@ const BuyCv = () => {
                         justifyContent: 'center', alignItems: 'center'
                     }}>
                         <div class="spinner-border" role="status">
-                            <span class="visually-hidden">Loading...</span>
+                            <span class="visually-hidden"></span>
                         </div>
                     </div>
 
