@@ -20,7 +20,7 @@ const ManagePost = () => {
     const [numberPage, setnumberPage] = useState('')
     const [user, setUser] = useState({})
     const [search, setSearch] = useState('')
-    const [censorCode, setCensorCode] = useState('PS3')
+    const [censorCode, setCensorCode] = useState('')
     const [propsModal, setPropsModal] = useState({
         isActive: false,
         handlePost: () => { },
@@ -278,7 +278,11 @@ const ManagePost = () => {
                             </Col>
                             <Col xs={8} xxl={8}>
                                 <label className='mr-2'>Loại trạng thái: </label>
-                                <Select onChange={(value) => handleOnChangeCensor(value)} style={{ width: '50%' }} size='default' defaultValue={id ? censorOptions[0].value : censorOptions[3].value} options={censorOptions}>
+                                <Select
+                                    onChange={(value) => handleOnChangeCensor(value)}
+                                    style={{ width: '50%' }} size='default'
+                                    defaultValue={id ? censorOptions[0].value : censorOptions[0].value}
+                                    options={censorOptions}>
 
                                 </Select>
                             </Col>
